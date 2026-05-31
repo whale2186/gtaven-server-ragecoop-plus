@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+REQUIRED_MAJOR=6
+
+if ! command -v dotnet/dotnet >/dev/null 2>&1; then
+    echo "Error: dotnet not found."
+    exit 1
+fi
+
+# Try SDK version first
+DOTNET_VERSION=$(dotnet/dotnet --version 2>/dev/null || true)
+
+# If no SDK is installed, fall back to runtime version
+if [ -z "$DOTNET_VERSION" ]; then
+    DOTNET_VERSION=$(dotnet/dotnet --list-runtimes 2>/dev/null | \
+        awk '/Microsoft\.NETCore\.App/ {print $2; exit}')
+fi
+
+if [ -z "$DOTNET_VERSION" ]; then
+    echo "Error: no .NET runtime found."
+    exit 1
+fi
+
+DOTNET_MAJOR=$(echo "$DOTNET_VERSION" | cut -d. -f1)
+
+if [[ "$DOTNET_MAJOR" =~ ^[0-9]+$ ]] && [ "$DOTNET_MAJOR" -lt "$REQUIRED_MAJOR" ]; then
+    echo "Error: .NET $REQUIRED_MAJOR or newer is required."
+    echo "Found: $DOTNET_VERSION"
+    exit 1
+fi
+
+echo "Using .NET $DOTNET_VERSION"
+
+exec dotnet RageCoop.Server.dll
