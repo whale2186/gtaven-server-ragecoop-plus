@@ -9,7 +9,7 @@ This is a Linux port of `RageCoop Plus Server`, originally built for Windows.
 2. Extract the archive:
 
 ```bash
-tar -xf RageCoop.Server.tar.xz
+tar -xf RageCoop.Server.tar.gz
 ```
 
 3. Make the server executable:
