@@ -9,7 +9,7 @@ This is a Linux port of `RageCoop Plus Server`, originally built for Windows.
 2. Extract the archive:
 
 ```bash
-tar -xf RageCoop.Server.tar.gz
+tar -xf RageCoop-1.0.x.x-linux-x64.tar.gz
 ```
 
 3. Make the server executable:
@@ -26,7 +26,7 @@ sudo chmod +x RageCoop.Server
 
 ## Notes
 
-* If your archive has a different name, replace `RageCoop.Server.tar.gz` with the correct filename.
+* If your archive has a different name, replace `RageCoop-1.0.x.x-linux-x64.tar.gz` with the correct filename.
 * If the file is already executable, you can skip the `chmod` step.
 * Run the server from the directory where `RageCoop.Server` was extracted.
 
